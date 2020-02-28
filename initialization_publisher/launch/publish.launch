@@ -1,0 +1,15 @@
+<launch>
+<!--MH_01_easy MH_02_easy MH_03_medium MH_04_difficult MH_05_difficult V1_01_easy V1_02_medium V1_03_difficult V2_01_easy V2_02_medium V2_03_difficult  -->
+	<arg name="sequence_name" default = "V1_02_medium" />
+
+    <node name="benchmark_publisher" pkg="benchmark_publisher" type="benchmark_publisher" output="screen">
+        <param name="data_name" type="string" value="$(find benchmark_publisher)/config/$(arg sequence_name)/data.csv" />
+        <param name="cloud_name" type="string" value="$(find map_fusion)/config/$(arg sequence_name)/dataseg.ply" />
+        <param name="config_file" type="string" value="$(find map_fusion)/config/$(arg sequence_name)/sensor.yaml" />
+        <remap from="~estimated_odometry" to="/vins_estimator/keyframe_pose" />
+    </node>
+<!--
+    <node pkg="rosbag" type="play" name="player" output="log" 
+    args="/home/tony-ws1/bag/ijrr_euroc_mav_dataset/$(arg sequence_name)/$(arg sequence_name).bag -r 2" />
+-->
+</launch>

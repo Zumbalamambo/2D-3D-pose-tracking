@@ -1,0 +1,33 @@
+MODEL:
+  ARCH: "unet"
+
+DATASETS:
+  TRAIN: ("wireframe",)
+  TEST: ("EuRoc",)
+
+SOLVER:
+  BATCH_SIZE: 16
+  STEPS: (50,100,150)
+
+save_dir: "experiments/unet"
+
+image_topic: "/cam0/image_raw"
+
+TEST:
+  TRANSFORM: True
+  OUTPUT_MODE: "save"
+  DISPLAY:
+    THRESHOLD: 0.2
+
+distortion_parameters:
+   k1: 0.005403441137290043
+   k2: -0.004430036145734217
+   p1: 2.3253828590255113e-05
+   p2: -1.4587176183337531e-05
+projection_parameters:
+   fx: 380.7717651612202
+   fy: 380.92158674730956
+   cx: 317.60534045716395
+   cy: 239.85147774070316
+
+

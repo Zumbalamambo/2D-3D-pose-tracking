@@ -1,0 +1,16 @@
+<launch>
+    <arg name="data_path" default = "/home/huai/Documents/data/VIO_test/NSH" />
+    <arg name="cloud_name"  default="$(arg data_path)/nsh_sparse.ply"/>
+    <arg name="config_file" default="$(find map_fusion)/config/realsense.yaml" />
+
+    <node name="realsense_d435i_publisher" pkg="benchmark_publisher" type="realsense_d435i_publisher" output="screen">
+        <param name="cloud_name" type="string" value="$(arg cloud_name)" />
+        <param name="config_file" type="string" value="$(arg config_file)" />
+        <remap from="~estimated_odometry" to="/vins_estimator/odometry" />
+    </node> 
+
+<!--
+    <node pkg="rosbag" type="play" name="player" output="log" 
+    args="/home/tony-ws1/bag/ijrr_euroc_mav_dataset/$(arg sequence_name)/$(arg sequence_name).bag -r 2" />
+-->
+</launch>

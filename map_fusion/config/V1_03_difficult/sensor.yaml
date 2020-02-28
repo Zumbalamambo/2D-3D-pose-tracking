@@ -1,0 +1,65 @@
+%YAML:1.0
+
+
+image_topic: "/cam0/image_raw"
+output_path: "/home/huai/output/"
+#camera calibration 
+model_type: PINHOLE
+camera_name: camera
+
+distortion_parameters:
+   k1: -2.917e-01
+   k2: 8.228e-02
+   p1: 5.333e-05
+   p2: -1.578e-04
+projection_parameters:
+   fx: 4.616e+02
+   fy: 4.603e+02
+   cx: 3.630e+02
+   cy: 2.481e+02
+
+   
+#additional transform for bais
+initialRotation: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   # data: [1, 0, 0,
+   #        0, 1, 0,
+   #        0, 0, 1]
+   data: [0.9986,   -0.0467,   -0.0247,
+          0.0465,    0.9989,   -0.0094,
+          0.0251,    0.0082,    0.9997]
+
+#Translation from first body frame to world frame
+initialTranslation: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   # data: [0.0, 0.0, 0.0]
+   data: [0.1440, -0.0307, -0.1073]
+
+   
+# Rotation from camera frame to imu frame, imu^R_cam
+extrinsicRotation: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   data: [0.0148655429818, -0.999880929698, 0.00414029679422,
+           0.999557249008, 0.0149672133247, 0.025715529948, 
+           -0.0257744366974, 0.00375618835797, 0.999660727178]
+#Translation from camera frame to imu frame, imu^T_cam
+extrinsicTranslation: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [-0.0216401454975,-0.064676986768, 0.00981073058949]
+
+# optimization parameters
+iterations: 1
+per_inliers: 5
+savefile: 0
+threshold: 35
+lamda: 0.1745 #0.1745
+show: 0
+

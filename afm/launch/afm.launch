@@ -1,0 +1,11 @@
+<launch>
+    <arg name="image_topic" default = "/camera/infra1/image_rect_raw" />
+    <node pkg="afm" name="ros_test" type="ros_test.py" output="screen" cwd="node">
+        <param name="config_file" type="string" value="$(find afm)/scripts/experiments/afm_unet_euroc.yaml" />
+        <param name="image"   type="string"  value="$(find afm)/scripts/data/EuRoc/images/img_0.jpg"/>
+        <param name="gpu"     value="0" />
+        <!--<param name="iterations"          value="1.0"/> -->
+        <!--remap from="/cam0/image_raw" to="$(arg image_topic)" /> --> 
+    </node>
+
+</launch>
