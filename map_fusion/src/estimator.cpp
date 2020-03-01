@@ -282,10 +282,7 @@ vector<line2d> estimator::undistortedPoints(vector<line2d> &_lines2d)
 // using extracted 2D and 3D line features to get the correspondence and refine the camera pose
 void estimator::jointoptimization()
 {
-	// one frame optimizition is not as good as before. need futher optimized
-	// Eigen::Matrix3d updatedRot = b2c_R.transpose() * R_w[frame_count].transpose();
-	// Eigen::Vector3d updatedTrans = b2c_R.transpose() * (R_w[frame_count].transpose() * (- T_w[frame_count]) - b2c_T);
-	
+
 	Matrix3d delta_R_n[frame_count+1];
 	Vector3d delta_T_n[frame_count+1];
 	delta_R_n[frame_count]=delta_R[frame_count];
@@ -314,11 +311,9 @@ void estimator::jointoptimization()
 			Num_matches += matches2d3d[nframe].size();
 		}
 		if (save && iter == 0)
-			//for (int nframe = frame_count; nframe >= 0; nframe--)
-			{
-				savematches(matches2d3d[frame_count], frame_count, delta_R_n[frame_count], delta_T_n[frame_count], false);
-			}
-		// ROS_DEBUG("matched size: %d", Num_matches);
+		{
+			savematches(matches2d3d[frame_count], frame_count, delta_R_n[frame_count], delta_T_n[frame_count], false);
+		}
 		if (Num_matches < frame_count * per_inliers) //current frame feature is not stable, skip, use the vio pose
 		{
 			ROS_WARN("feature matching is not enough");
@@ -363,12 +358,11 @@ void estimator::jointoptimization()
 		Eigen::Vector3d t(ceres_translation[0], ceres_translation[1], ceres_translation[2]);
 		R_w[frame_count] = q.normalized().toRotationMatrix();
 		T_w[frame_count] = t;
-		
-		if (save && iter == iterations-1)
-			//for (int nframe = frame_count; nframe >= 0; nframe--)
-			{
-				savematches(matches2d3d[frame_count], frame_count, delta_R_n[frame_count], delta_T_n[frame_count], true);
-			}
+
+		if (save && iter == iterations - 1)
+		{
+			savematches(matches2d3d[frame_count], frame_count, delta_R_n[frame_count], delta_T_n[frame_count], true);
+		}
 		//more restrict threshold for inlier correspondences
 		theta=0.9*theta;
 		reject_threshod=0.9*reject_threshod;

@@ -146,27 +146,25 @@ int main(int argc, char **argv)
     cv::cv2eigen(cv_bias_T, baseTgt);
     std::vector<cv::Point3d> model_points;
     // nsh wall
-    model_points.push_back(cv::Point3d(10.1319, -8.6280, 311.5690));
-    model_points.push_back(cv::Point3d(5.8984, -12.0807, 311.5740));
-    model_points.push_back(cv::Point3d(3.4637, -11.8742, 303.9010));
-    model_points.push_back(cv::Point3d(9.24275, 0.2024, 303.8120));
-    model_points.push_back(cv::Point3d(6.5389, -1.4134, 303.9270));
-    model_points.push_back(cv::Point3d(5.0779, -13.4357, 306.7890));
-    // nsh floor2
-    // model_points.push_back(cv::Point3d(0.323834, -1.47807, 248.7590));
-    // model_points.push_back(cv::Point3d(2.5406, -2.0500, 248.7320));
-    // model_points.push_back(cv::Point3d(3.9421, -4.7723,248.7400));
-    // model_points.push_back(cv::Point3d(3.9695,-4.8148, 250.8440));
-    // model_points.push_back(cv::Point3d(2.4435,-1.6717,248.7610));
-    // model_points.push_back(cv::Point3d(3.0735,-1.3492,248.7490));
-    // nsh floor2_long
-    // model_points.push_back(cv::Point3d(24.7378, 19.0196, 248.8060));
-    // model_points.push_back(cv::Point3d(24.4447, 18.6818, 248.8060));
-    // model_points.push_back(cv::Point3d(21.7915, 16.2203, 250.9190));
-    // model_points.push_back(cv::Point3d(21.7938, 16.2288, 248.7820));
-    // model_points.push_back(cv::Point3d(21.2046, 15.5220, 250.9130));
-    // model_points.push_back(cv::Point3d(21.1996, 14.8184, 248.7830));
-    
+    // model_points.push_back(cv::Point3d(10.1319, -8.6280, 311.5690));
+    // model_points.push_back(cv::Point3d(5.8984, -12.0807, 311.5740));
+    // model_points.push_back(cv::Point3d(3.4637, -11.8742, 303.9010));
+    // model_points.push_back(cv::Point3d(9.24275, 0.2024, 303.8120));
+    // model_points.push_back(cv::Point3d(6.5389, -1.4134, 303.9270));
+    // model_points.push_back(cv::Point3d(5.0779, -13.4357, 306.7890));
+    // corridors
+    model_points.push_back(cv::Point3d(0.323834, -1.47807, 248.7590));
+    model_points.push_back(cv::Point3d(2.5406, -2.0500, 248.7320));
+    model_points.push_back(cv::Point3d(3.9421, -4.7723,248.7400));
+    model_points.push_back(cv::Point3d(3.9695,-4.8148, 250.8440));
+    model_points.push_back(cv::Point3d(2.4435,-1.6717,248.7610));
+    model_points.push_back(cv::Point3d(3.0735,-1.3492,248.7490));
+    capturePoint.push_back(cv::Point2d(405, 356));
+    capturePoint.push_back(cv::Point2d(322, 320));
+    capturePoint.push_back(cv::Point2d(380, 304));
+    capturePoint.push_back(cv::Point2d(387, 216));
+    capturePoint.push_back(cv::Point2d(301, 321));
+    capturePoint.push_back(cv::Point2d(265, 316));
     // smith
     // model_points.push_back(cv::Point3d(-30.0273,2.8234,324.9770));
     // model_points.push_back(cv::Point3d(-30.1617,2.7611,326.1289));
@@ -242,15 +240,13 @@ int main(int argc, char **argv)
                                           pose_msg->pose.pose.orientation.y,
                                           pose_msg->pose.pose.orientation.z);
             Matrix3d body_R = Q.normalized().toRotationMatrix(); 
-            // Vector3d body_T = Vector3d(0,0,0);
-            // Matrix3d body_R = MatrixXd::Identity(3,3);
 
-            cout<<"camera R:"<<Q.w()<<","<<Q.x()<<","<<Q.y()<<","<<Q.z()<<endl<<"camera T:"<<body_T<<endl;
-            org=image;
-            namedWindow("org", 1);
-            setMouseCallback("org", on_mouse, 0);
-            imshow("org", org);
-            waitKey(0);
+            // manully label 2D points in the image
+            // org=image;
+            // namedWindow("org", 1);
+            // setMouseCallback("org", on_mouse, 0);
+            // imshow("org", org);
+            // waitKey(0);
 
             cv::Mat cv_rotation;
             cv::Mat cv_translation;
@@ -267,12 +263,7 @@ int main(int argc, char **argv)
             baseTgt=body_R*c2b_R*trans+body_R*c2b_T+body_T;
             cout<<"est R="<<endl<<baseRgt<<endl;
             cout<<"est T="<<endl<<baseTgt<<endl;
-            // Eigen::Vector3d pt3d(model_points[0].x, model_points[0].y, model_points[0].z);
-            // cout<<"3D points:"<<pt3d<<endl;
-            // Eigen::Matrix3d K;
-            // cv::cv2eigen(camera_matrix, K);
-            // Eigen::Vector3d point2d=K*(rot*pt3d+trans);
-            // cout<<"2D points:"<< point2d.x()/point2d.z()<<","<<point2d.y()/point2d.z()<<endl;
+
             initialization_done = true;
         }
 

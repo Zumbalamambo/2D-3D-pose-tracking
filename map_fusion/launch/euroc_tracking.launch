@@ -1,0 +1,32 @@
+<launch>
+<!--MH_01_easy MH_02_easy MH_03_medium MH_04_difficult MH_05_difficult V1_01_easy V1_02_medium V1_03_difficult V2_01_easy V2_02_medium V2_03_difficult  -->
+	<arg name="sequence_name" default = "V1_02_medium" />
+    <arg name="cloud_name"  default="$(find map_fusion)/config/$(arg sequence_name)/dataseg.ply"/>
+    <arg name="global_pose_name" default="$(find map_fusion)/config/$(arg sequence_name)/data.csv"/>
+    <arg name="config_file" default="$(find map_fusion)/config/$(arg sequence_name)/sensor.yaml" />
+
+    <node name="tracking_node" pkg="map_fusion" type="window_tracking_node" output="screen">
+        <param name="config_file" type="string" value="$(arg config_file)" />
+        <param name="lines_map" type="string" value="$(find map_fusion)/config/$(arg sequence_name)/line_3d.txt" />
+    </node>
+
+    <node name="euroc_publisher" pkg="initialization_publisher" type="euroc_publisher" output="screen">
+        <param name="data_name" type="string" value="$(arg global_pose_name)" />
+        <param name="cloud_name" type="string" value="$(arg cloud_name)" />
+        <param name="config_file" type="string" value="$(arg config_file)" />
+        <remap from="~estimated_odometry" to="/vins_estimator/odometry" />
+    </node>
+
+    <arg name="image_topic" default = "/cam0/image_raw" />
+    <node pkg="afm" name="ros_test" type="ros_test.py" output="screen" cwd="node">
+        <param name="config_file" type="string" value="$(find afm)/scripts/experiments/afm_unet_euroc.yaml" />
+        <param name="image"   type="string"  value="$(find afm)/scripts/data/EuRoc/images/img_0.jpg"/>
+        <param name="gpu"     value="0" />
+        <!--<param name="iterations"          value="1.0"/> -->
+        <remap from="/cam0/image_raw" to="$(arg image_topic)" /> 
+    </node>
+<!--
+    <node pkg="rosbag" type="play" name="player" output="log" 
+    args="/home/tony-ws1/bag/ijrr_euroc_mav_dataset/$(arg sequence_name)/$(arg sequence_name).bag -r 2" />
+-->
+</launch>

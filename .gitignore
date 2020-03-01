@@ -1,1 +1,4 @@
+.vscode/
 VINS-Mono/
+map_fusion/config/realsense/nsh/
+map_fusion/config/realsense/smith/
