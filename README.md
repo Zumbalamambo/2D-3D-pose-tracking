@@ -5,7 +5,7 @@
 The video demos can be seen: [YouTube](https://youtu.be/vm8ytRzahXU)
 
 <a href="https://youtu.be/vm8ytRzahXU" target="_blank"><img src="./VINS-Mono-config/result_prev.jpg" 
-alt="cla" width="500" height="250" border="1" /></a>
+alt="cla" width="800" height="400" border="1" /></a>
 
 2D-3D pose tracking is a real-time camera localization framework with prior LiDAR maps. It detects geometric 3D lines offline from LiDAR maps and use AFM to detect 2D lines from video sequences online. With the pose prediction from VIO, we can efficiently obtain coarse 2D-3D line correspondences. After that, camera poses and 2D-3D correspondences are iteratively optimized by minimizing the projection error of correspondences and rejecting outliers.  The 2D-3D correspondences greatly reduce the pose drifts of VIO system without using visual-revisiting loop
 closure. This code runs on **Linux**. 
