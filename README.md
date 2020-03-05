@@ -2,7 +2,7 @@
 ## Monocular Camera Localization in Prior LiDAR Maps with 2D-3D Line Correspondences
 
 
-The video demos can be seen: [Corridors](https://youtu.be/vm8ytRzahXU) [EuRoC](https://youtu.be/mHaDKoIHNwI)
+The video demos can be seen: [Corridors](https://youtu.be/H80Bnxm8IPE) [EuRoC](https://youtu.be/mHaDKoIHNwI)
 
 <a href="https://youtu.be/H80Bnxm8IPE" target="_blank"><img src="./VINS-Mono-config/result_prev.jpg" 
 alt="cla" width="400" height="200" border="5" /></a> 
