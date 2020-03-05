@@ -4,7 +4,7 @@
 
 The video demos can be seen: [Corridors](https://youtu.be/vm8ytRzahXU) [EuRoC](https://youtu.be/mHaDKoIHNwI)
 
-<a href="https://youtu.be/vm8ytRzahXU" target="_blank"><img src="./VINS-Mono-config/result_prev.jpg" 
+<a href="https://youtu.be/H80Bnxm8IPE" target="_blank"><img src="./VINS-Mono-config/result_prev.jpg" 
 alt="cla" width="400" height="200" border="5" /></a> 
 <a href="https://youtu.be/mHaDKoIHNwI" target="_blank"><img src="./VINS-Mono-config/euroc_demo.jpg" 
 alt="cla" width="400" height="200" border="5" /></a>
