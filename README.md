@@ -67,8 +67,8 @@ Download [Corridors data](https://drive.google.com/file/d/1Ffke-wFpRifmw7nvcwQCr
 
 To run VINS-Mono on this data, 
 ```
-    cp src/VINS-Mono-config/realsense_infra1_config.yaml src/VINS-Mono/config/realsense/
-    cp src/VINS-Mono-config/realsense_infra.launch src/VINS-Mono/vins_estimator/launch/
+    cp src/2D-3D-pose-tracking/VINS-Mono-config/realsense_infra1_config.yaml src/VINS-Mono/config/realsense/
+    cp src/2D-3D-pose-tracking/VINS-Mono-config/realsense_infra.launch src/VINS-Mono/vins_estimator/launch/
 ```
 Then,
 ```
